@@ -21,7 +21,7 @@ CAMINHO_AVALIACAO = _ROOT / "outputs" / "avaliacao" / "relatorio_avaliacao.json"
 
 def api_disponivel() -> bool:
     try:
-        r = requests.get(f"{API_BASE}/saude/", timeout=2)
+        r = requests.get(f"{API_BASE}/saude/", timeout=0.5)
         return r.status_code == 200
     except Exception:
         return False
