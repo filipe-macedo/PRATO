@@ -1,12 +1,24 @@
 services:
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # Dashboard Streamlit — Modo Demo
+  # URL: https://prato-dashboard.onrender.com
+  #
+  # Para ativar o backend completo (API + modelo treinado), adicione o serviço
+  # prato-api abaixo e defina API_URL com a URL pública do serviço de API.
+  # ────────────────────────────────────────────────────────────────────────────
   - type: web
     name: prato-dashboard
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run dashboard/Inicio.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    startCommand: >-
+      streamlit run dashboard/Inicio.py
+      --server.port $PORT
+      --server.address 0.0.0.0
+      --server.headless true
+    autoDeploy: true
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: API_URL
         value: ""
-    autoDeploy: true

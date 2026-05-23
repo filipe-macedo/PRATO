@@ -1,6 +1,11 @@
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+
+_ROOT = Path(__file__).resolve().parent.parent.parent  # PRATO/
+_DASH = Path(__file__).resolve().parent.parent          # PRATO/dashboard/
+for _p in [str(_ROOT), str(_DASH)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 import numpy as np
 import streamlit as st

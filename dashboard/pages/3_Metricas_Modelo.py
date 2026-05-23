@@ -1,6 +1,11 @@
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+
+_ROOT = Path(__file__).resolve().parent.parent.parent  # PRATO/
+_DASH = Path(__file__).resolve().parent.parent          # PRATO/dashboard/
+for _p in [str(_ROOT), str(_DASH)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 import streamlit as st
 import plotly.graph_objects as go
@@ -37,13 +42,12 @@ if not df_comp.empty:
 
 st.markdown("### Gráficos de Avaliação")
 imgs = [
-    ("../outputs/avaliacao/residuos_analise.png", "Análise de Resíduos"),
-    ("../outputs/avaliacao/curva_cumulativa_erro.png", "Curva Cumulativa"),
+    (_ROOT / "outputs" / "avaliacao" / "residuos_analise.png", "Análise de Resíduos"),
+    (_ROOT / "outputs" / "avaliacao" / "curva_cumulativa_erro.png", "Curva Cumulativa"),
 ]
 cols = st.columns(len(imgs))
 for col, (caminho, titulo) in zip(cols, imgs):
-    p = Path(caminho)
-    if p.exists():
-        col.image(str(p), caption=titulo, use_column_width=True)
+    if caminho.exists():
+        col.image(str(caminho), caption=titulo, use_column_width=True)
     else:
         col.info(f"Execute `make pipeline` para gerar '{titulo}'.")
