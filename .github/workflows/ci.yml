@@ -1,0 +1,88 @@
+name: CI — PRATO
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-test:
+    name: Lint + Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Criar .env de teste
+        run: |
+          echo "DATABASE_URL=sqlite:///./prato_test.db" >> .env
+          echo "CAMINHO_MODELO=models/modelo_final.pkl"  >> .env
+          echo "DEBUG=true"                              >> .env
+          echo "ALLOWED_ORIGINS=http://localhost:8501"   >> .env
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      - name: Testes com cobertura
+        run: |
+          pytest tests/ \
+            --cov=src \
+            --cov=app \
+            --cov-report=term-missing \
+            --cov-report=xml:coverage.xml \
+            -v
+
+      - name: Upload cobertura (Codecov)
+        uses: codecov/codecov-action@v4
+        if: matrix.python-version == '3.11'
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+        continue-on-error: true   # Codecov é opcional
+
+  # ---------------------------------------------------------------------------
+  # Job separado: verifica que dados sensíveis não foram comitados
+  # ---------------------------------------------------------------------------
+  security-check:
+    name: Verificação de dados sensíveis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Garantir ausência de .env real
+        run: |
+          if [ -f .env ]; then
+            echo "❌ Arquivo .env encontrado no repositório!" && exit 1
+          fi
+          echo "✅ Nenhum .env real comitado."
+
+      - name: Garantir ausência de modelos serializados
+        run: |
+          if find models/ -name "*.pkl" 2>/dev/null | grep -q .; then
+            echo "❌ Arquivo .pkl encontrado em models/!" && exit 1
+          fi
+          echo "✅ Nenhum modelo .pkl comitado."
+
+      - name: Garantir ausência de banco de dados
+        run: |
+          if find . -name "*.db" -o -name "*.sqlite" 2>/dev/null | grep -q .; then
+            echo "❌ Arquivo de banco de dados encontrado!" && exit 1
+          fi
+          echo "✅ Nenhum banco de dados comitado."
