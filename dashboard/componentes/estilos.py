@@ -17,6 +17,53 @@ _CSS = """
     border-right: 1px solid #1e293b !important;
 }
 
+/* ── Logo PRATO acima dos links de navegação ────────────────────────────── *
+   O Streamlit multipage coloca stSidebarNav primeiro no DOM.
+   Reordenamos via flexbox para que o conteúdo do st.sidebar (logo)
+   apareça no topo.                                                          */
+[data-testid="stSidebar"] > div:first-child {
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+[data-testid="stSidebarNav"] {
+    order: 2 !important;
+    flex: 0 0 auto !important;
+    padding-top: 0.5rem !important;
+}
+[data-testid="stSidebar"] > div:first-child > div:not([data-testid="stSidebarNav"]) {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+}
+
+/* ── Botão de reabrir sidebar (ícone >) ─────────────────────────────────── *
+   Com secondaryBackgroundColor escuro o Streamlit pinta o botão com
+   fundo #0f172a e ícone #0f172a — invisível. Forçamos contraste.          */
+[data-testid="stSidebarCollapsedControl"] {
+    visibility: visible !important;
+    display: flex !important;
+    align-items: center !important;
+    background-color: #0f172a !important;
+    border-radius: 0 8px 8px 0 !important;
+    border: 1px solid #334155 !important;
+    border-left: none !important;
+}
+[data-testid="stSidebarCollapsedControl"] button,
+[data-testid="stSidebarCollapsedControl"] > button {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+    border: none !important;
+}
+[data-testid="stSidebarCollapsedControl"] button:hover {
+    background-color: #1e293b !important;
+}
+[data-testid="stSidebarCollapsedControl"] svg {
+    fill: #e2e8f0 !important;
+    stroke: #e2e8f0 !important;
+    color: #e2e8f0 !important;
+}
+
 /* texto genérico */
 [data-testid="stSidebar"] p,
 [data-testid="stSidebar"] span,
