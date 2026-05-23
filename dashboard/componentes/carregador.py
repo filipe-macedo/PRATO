@@ -66,16 +66,29 @@ def carregar_historico_vendas(data_inicio=None, data_fim=None) -> pd.DataFrame:
             pass
 
     # 2. Arquivos processados
-    partes = [pd.read_csv(c, parse_dates=["data"])
-              for c in [CAMINHO_TREINO, CAMINHO_TESTE] if c.exists()]
+    partes = []
+    for c in [CAMINHO_TREINO, CAMINHO_TESTE]:
+        if c.exists():
+            try:
+                parte = pd.read_csv(c, sep=None, engine="python")
+                if "data" in parte.columns:
+                    parte["data"] = pd.to_datetime(parte["data"], errors="coerce")
+                partes.append(parte)
+            except Exception:
+                pass
     if partes:
         df = pd.concat(partes, ignore_index=True)
         return _filtrar_periodo(df, data_inicio, data_fim)
 
     # 3. Dados de exemplo (demo)
     if CAMINHO_EXEMPLO.exists():
-        df = pd.read_csv(CAMINHO_EXEMPLO, parse_dates=["data"])
-        return _filtrar_periodo(df, data_inicio, data_fim)
+        try:
+            df = pd.read_csv(CAMINHO_EXEMPLO, sep=None, engine="python")
+            if "data" in df.columns:
+                df["data"] = pd.to_datetime(df["data"], errors="coerce")
+            return _filtrar_periodo(df, data_inicio, data_fim)
+        except Exception:
+            pass
 
     return pd.DataFrame()
 
@@ -138,7 +151,13 @@ def carregar_metricas() -> dict:
 @st.cache_data(ttl=300)
 def carregar_previsoes_arquivo() -> pd.DataFrame:
     if CAMINHO_PREVISOES.exists():
-        return pd.read_csv(CAMINHO_PREVISOES, parse_dates=["data"])
+        try:
+            df = pd.read_csv(CAMINHO_PREVISOES, sep=None, engine="python")
+            if "data" in df.columns:
+                df["data"] = pd.to_datetime(df["data"], errors="coerce")
+            return df
+        except Exception:
+            pass
     return pd.DataFrame()
 
 
