@@ -17,10 +17,7 @@ _CSS = """
     border-right: 1px solid #1e293b !important;
 }
 
-/* ── Logo PRATO acima dos links de navegação ────────────────────────────── *
-   O Streamlit multipage coloca stSidebarNav primeiro no DOM.
-   Reordenamos via flexbox para que o conteúdo do st.sidebar (logo)
-   apareça no topo.                                                          */
+/* ── Ordem: nav no topo, conteúdo do st.sidebar abaixo ─────────────────── */
 [data-testid="stSidebar"] > div:first-child {
     display: flex !important;
     flex-direction: column !important;
@@ -28,12 +25,11 @@ _CSS = """
     overflow-x: hidden !important;
 }
 [data-testid="stSidebarNav"] {
-    order: 2 !important;
+    order: 1 !important;
     flex: 0 0 auto !important;
-    padding-top: 0.5rem !important;
 }
 [data-testid="stSidebar"] > div:first-child > div:not([data-testid="stSidebarNav"]) {
-    order: 1 !important;
+    order: 2 !important;
     flex: 1 1 auto !important;
 }
 

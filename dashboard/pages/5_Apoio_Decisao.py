@@ -12,9 +12,11 @@ from componentes.carregador import carregar_historico_vendas, carregar_previsoes
 from componentes.alertas import resumo_riscos_tabela
 from componentes.tabelas import formatar_tabela_riscos
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(page_title="Apoio à Decisão | PRATO", layout="wide")
 aplicar_estilos()
+renderizar_sidebar()
 
 st.title("Apoio à Decisão Operacional")
 

@@ -12,9 +12,11 @@ import plotly.graph_objects as go
 from componentes.carregador import carregar_metricas
 from componentes.tabelas import tabela_metricas_modelos
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(page_title="Métricas do Modelo | PRATO", layout="wide")
 aplicar_estilos()
+renderizar_sidebar()
 
 st.title("Métricas do Modelo")
 

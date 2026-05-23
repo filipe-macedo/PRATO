@@ -13,9 +13,11 @@ import pandas as pd
 from componentes.carregador import carregar_historico_vendas, carregar_previsoes_arquivo
 from componentes.graficos import previsto_vs_realizado, dispersao_previsto_realizado, distribuicao_erros
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(page_title="Previsto × Realizado | PRATO", layout="wide")
 aplicar_estilos()
+renderizar_sidebar()
 
 st.title("Previsto × Realizado")
 

@@ -17,9 +17,11 @@ from componentes.carregador import (
 from componentes.graficos import gauge_risco
 from componentes.alertas import classificar_risco, exibir_alerta
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(page_title="Previsão de Demanda | PRATO", layout="wide")
 aplicar_estilos()
+renderizar_sidebar()
 
 st.title("Previsão de Demanda")
 

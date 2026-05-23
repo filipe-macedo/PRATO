@@ -12,11 +12,11 @@ for _p in [str(_ROOT), str(_DASH)]:
         sys.path.insert(0, _p)
 
 from componentes.carregador import (
-    carregar_historico_vendas, carregar_metricas,
-    carregar_csv_usuario, api_disponivel,
+    carregar_historico_vendas, carregar_metricas, api_disponivel,
 )
 from componentes.graficos import serie_temporal_vendas
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(
     page_title="PRATO — Previsão de Demanda",
@@ -26,46 +26,7 @@ st.set_page_config(
 )
 
 aplicar_estilos()
-
-# ── Sidebar ─────────────────────────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("""
-        <div style="padding:0.25rem 0 1.5rem 0">
-            <span style="font-size:1.45rem;font-weight:800;color:#f1f5f9;
-                         letter-spacing:-0.02em;font-family:sans-serif">PRATO</span>
-            <span style="color:#22c55e;font-size:1.1rem;margin-left:3px">&#9679;</span>
-            <div style="font-size:0.7rem;color:#475569;margin-top:4px;
-                        font-weight:500;letter-spacing:0.05em;text-transform:uppercase">
-                Previsão de Demanda
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-
-    _api_ok = api_disponivel()
-
-    if _api_ok:
-        st.success("API Backend online")
-        if st.button("Atualizar dados"):
-            st.cache_data.clear()
-    else:
-        st.info("Modo demo — dados sintéticos carregados automaticamente.")
-        st.caption(
-            "Previsões estimadas com base no histórico de exemplo."
-        )
-        st.markdown("---")
-        st.markdown("**Usar seus próprios dados**")
-        arquivo = st.file_uploader(
-            "Arquivo CSV ou Excel (opcional)",
-            type=["csv", "xlsx", "xls"],
-        )
-        if arquivo:
-            df_usuario = carregar_csv_usuario(arquivo)
-            if df_usuario is not None:
-                st.session_state["df_vendas"] = df_usuario
-                st.success(f"{len(df_usuario):,} registros carregados.")
-
-    st.markdown("---")
-    st.caption("v1.0.0 · github.com/filipe-macedo/PRATO")
+renderizar_sidebar(mostrar_upload=True)
 
 # ── Corpo principal ─────────────────────────────────────────────────────────
 st.title("Dashboard de Previsão de Demanda")

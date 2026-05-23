@@ -13,9 +13,11 @@ from componentes.carregador import carregar_historico_vendas
 from componentes.graficos import serie_temporal_vendas, barras_por_produto, heatmap_dia_turno
 from componentes.tabelas import tabela_vendas_resumo
 from componentes.estilos import aplicar_estilos
+from componentes.sidebar import renderizar_sidebar
 
 st.set_page_config(page_title="Histórico de Vendas | PRATO", layout="wide")
 aplicar_estilos()
+renderizar_sidebar()
 
 st.title("Histórico de Vendas")
 
