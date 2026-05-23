@@ -284,13 +284,28 @@ hr {
     margin: 1.25rem 0 !important;
 }
 
-/* esconde rodapé e menu hambúrguer do Streamlit */
-footer          { visibility: hidden !important; }
-#MainMenu       { visibility: hidden !important; }
-header          { visibility: hidden !important; }
+/* esconde rodapé e menu hambúrguer — NÃO esconde o header inteiro
+   para preservar o botão de reabrir a sidebar                          */
+footer    { visibility: hidden !important; }
+#MainMenu { visibility: hidden !important; }
 
-/* remove padding excessivo no topo quando header está oculto */
-.main .block-container { padding-top: 1.75rem !important; }
+/* esconde apenas a barra de ferramentas interna (deploy, running…)
+   mas mantém o botão de toggle da sidebar visível                      */
+[data-testid="stToolbar"]            { visibility: hidden !important; }
+[data-testid="stStatusWidget"]       { visibility: hidden !important; }
+[data-testid="stDecoration"]         { display: none !important; }
+
+/* header transparente e sem altura extra */
+header {
+    background: transparent !important;
+    height: auto !important;
+}
+
+/* botão de reabrir sidebar (ícone >) — garante visibilidade */
+[data-testid="stSidebarCollapsedControl"] {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
 
 </style>
 """
