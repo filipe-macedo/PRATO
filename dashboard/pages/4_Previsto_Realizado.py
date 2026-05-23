@@ -1,8 +1,8 @@
 import sys
 from pathlib import Path
 
-_ROOT = Path(__file__).resolve().parent.parent.parent  # PRATO/
-_DASH = Path(__file__).resolve().parent.parent          # PRATO/dashboard/
+_ROOT = Path(__file__).resolve().parent.parent.parent
+_DASH = Path(__file__).resolve().parent.parent
 for _p in [str(_ROOT), str(_DASH)]:
     if _p not in sys.path:
         sys.path.insert(0, _p)
@@ -12,18 +12,24 @@ import streamlit as st
 import pandas as pd
 from componentes.carregador import carregar_historico_vendas, carregar_previsoes_arquivo
 from componentes.graficos import previsto_vs_realizado, dispersao_previsto_realizado, distribuicao_erros
+from componentes.estilos import aplicar_estilos
 
 st.set_page_config(page_title="Previsto × Realizado | PRATO", layout="wide")
-st.title("⚖ Previsto × Realizado")
+aplicar_estilos()
+
+st.title("Previsto × Realizado")
 
 df_hist = carregar_historico_vendas()
 df_prev = carregar_previsoes_arquivo()
 
 if df_hist.empty or df_prev.empty:
-    st.warning("Necessário histórico de vendas e arquivo de previsões. Execute `make pipeline`.")
+    st.warning(
+        "São necessários o histórico de vendas e o arquivo de previsões. "
+        "Execute `make pipeline` para gerá-los."
+    )
     st.stop()
 
-chaves = [c for c in ["data", "produto", "turno"] if c in df_hist.columns and c in df_prev.columns]
+chaves    = [c for c in ["data", "produto", "turno"] if c in df_hist.columns and c in df_prev.columns]
 df_merged = df_hist.merge(df_prev[chaves + ["quantidade_prevista"]], on=chaves, how="inner")
 
 if df_merged.empty:
@@ -40,20 +46,23 @@ if "turno" in df_merged.columns:
     if turno_sel != "Todos":
         df_merged = df_merged[df_merged["turno"] == turno_sel]
 
-df_agg = (df_merged.groupby("data")[["quantidade_vendida", "quantidade_prevista"]]
-          .sum().reset_index().sort_values("data"))
+df_agg = (
+    df_merged.groupby("data")[["quantidade_vendida", "quantidade_prevista"]]
+    .sum().reset_index().sort_values("data")
+)
 
-erro = df_agg["quantidade_prevista"] - df_agg["quantidade_vendida"]
-mae = np.abs(erro).mean()
-rmse = np.sqrt((erro**2).mean())
-bias = erro.mean()
-within_20 = (np.abs(erro) / df_agg["quantidade_vendida"].replace(0, np.nan) <= 0.20).mean() * 100
+erro     = df_agg["quantidade_prevista"] - df_agg["quantidade_vendida"]
+mae      = np.abs(erro).mean()
+rmse     = np.sqrt((erro ** 2).mean())
+bias     = erro.mean()
+within20 = (np.abs(erro) / df_agg["quantidade_vendida"].replace(0, np.nan) <= 0.20).mean() * 100
 
+st.markdown("### Resumo do Período")
 m1, m2, m3, m4 = st.columns(4)
-m1.metric("MAE", f"{mae:.1f}")
-m2.metric("RMSE", f"{rmse:.1f}")
-m3.metric("Bias médio", f"{bias:+.1f}")
-m4.metric("Dentro de ±20%", f"{within_20:.0f}%")
+m1.metric("MAE",         f"{mae:.1f}")
+m2.metric("RMSE",        f"{rmse:.1f}")
+m3.metric("Bias médio",  f"{bias:+.1f}")
+m4.metric("Dentro de ±20%", f"{within20:.0f}%")
 
 tab1, tab2, tab3 = st.tabs(["Série Temporal", "Dispersão", "Distribuição de Erros"])
 with tab1:
