@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: prato-dashboard
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run dashboard/Inicio.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: API_URL
+        value: ""
+    autoDeploy: true
