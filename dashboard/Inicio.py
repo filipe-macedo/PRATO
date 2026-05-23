@@ -3,7 +3,13 @@ import pandas as pd
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# No Streamlit Cloud o CWD é a raiz do repo.
+# Precisamos de PRATO/ (para src/) E de dashboard/ (para componentes/).
+_ROOT = Path(__file__).parent.parent   # PRATO/
+_DASH = Path(__file__).parent          # PRATO/dashboard/
+for _p in [str(_ROOT), str(_DASH)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 from componentes.carregador import carregar_historico_vendas, carregar_metricas, carregar_csv_usuario, api_disponivel
 from componentes.graficos import serie_temporal_vendas

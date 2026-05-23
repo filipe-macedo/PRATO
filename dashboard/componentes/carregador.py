@@ -1,15 +1,22 @@
+import os
 import pandas as pd
 import requests
 import streamlit as st
 from pathlib import Path
 from datetime import date
 
-API_BASE = "http://localhost:8000"
-CAMINHO_PREVISOES = Path("../outputs/previsoes/previsoes_melhor_modelo.csv")
-CAMINHO_TREINO = Path("../data/processed/vendas_treino.csv")
-CAMINHO_TESTE = Path("../data/processed/vendas_teste.csv")
-CAMINHO_METRICAS = Path("../outputs/metricas/comparacao_modelos.csv")
-CAMINHO_AVALIACAO = Path("../outputs/avaliacao/relatorio_avaliacao.json")
+# API_URL pode ser definida via variável de ambiente (Streamlit Cloud Secrets
+# ou Render env vars). Fallback para localhost em desenvolvimento local.
+API_BASE = os.getenv("API_URL", "http://localhost:8000").rstrip("/")
+
+# Caminhos absolutos — funcionam tanto localmente quanto no Streamlit Cloud.
+# carregador.py fica em dashboard/componentes/, então .parent.parent.parent = PRATO/
+_ROOT = Path(__file__).resolve().parent.parent.parent
+CAMINHO_PREVISOES = _ROOT / "outputs" / "previsoes" / "previsoes_melhor_modelo.csv"
+CAMINHO_TREINO    = _ROOT / "data"    / "processed" / "vendas_treino.csv"
+CAMINHO_TESTE     = _ROOT / "data"    / "processed" / "vendas_teste.csv"
+CAMINHO_METRICAS  = _ROOT / "outputs" / "metricas"  / "comparacao_modelos.csv"
+CAMINHO_AVALIACAO = _ROOT / "outputs" / "avaliacao" / "relatorio_avaliacao.json"
 
 
 def api_disponivel() -> bool:
