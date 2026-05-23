@@ -25,6 +25,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+_api_ok = api_disponivel()
 aplicar_estilos()
 renderizar_sidebar(mostrar_upload=True)
 

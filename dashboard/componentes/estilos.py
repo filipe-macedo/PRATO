@@ -17,20 +17,10 @@ _CSS = """
     border-right: 1px solid #1e293b !important;
 }
 
-/* ── Ordem: nav no topo, conteúdo do st.sidebar abaixo ─────────────────── */
-[data-testid="stSidebar"] > div:first-child {
-    display: flex !important;
-    flex-direction: column !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
+/* ── Esconde o nav automático do Streamlit multipage ────────────────────── *
+   Usamos st.page_link() para controlo total da posição e ordem dos links. */
 [data-testid="stSidebarNav"] {
-    order: 1 !important;
-    flex: 0 0 auto !important;
-}
-[data-testid="stSidebar"] > div:first-child > div:not([data-testid="stSidebarNav"]) {
-    order: 2 !important;
-    flex: 1 1 auto !important;
+    display: none !important;
 }
 
 /* ── Sidebar sempre visível — remove botões de collapse/expand ───────────── */
