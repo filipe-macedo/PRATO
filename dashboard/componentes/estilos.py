@@ -37,31 +37,10 @@ _CSS = """
     flex: 1 1 auto !important;
 }
 
-/* ── Botão de reabrir sidebar (ícone >) ─────────────────────────────────── *
-   Com secondaryBackgroundColor escuro o Streamlit pinta o botão com
-   fundo #0f172a e ícone #0f172a — invisível. Forçamos contraste.          */
+/* ── Sidebar sempre visível — remove botões de collapse/expand ───────────── */
+[data-testid="stSidebarCollapseButton"],
 [data-testid="stSidebarCollapsedControl"] {
-    visibility: visible !important;
-    display: flex !important;
-    align-items: center !important;
-    background-color: #0f172a !important;
-    border-radius: 0 8px 8px 0 !important;
-    border: 1px solid #334155 !important;
-    border-left: none !important;
-}
-[data-testid="stSidebarCollapsedControl"] button,
-[data-testid="stSidebarCollapsedControl"] > button {
-    background-color: #0f172a !important;
-    color: #e2e8f0 !important;
-    border: none !important;
-}
-[data-testid="stSidebarCollapsedControl"] button:hover {
-    background-color: #1e293b !important;
-}
-[data-testid="stSidebarCollapsedControl"] svg {
-    fill: #e2e8f0 !important;
-    stroke: #e2e8f0 !important;
-    color: #e2e8f0 !important;
+    display: none !important;
 }
 
 /* texto genérico */
