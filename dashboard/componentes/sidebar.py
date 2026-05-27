@@ -30,7 +30,7 @@ def renderizar_sidebar(mostrar_upload: bool = False) -> None:
             <div style="padding:1rem 0 1rem 0">
                 <span style="font-size:1.45rem;font-weight:800;color:#f1f5f9;
                              letter-spacing:-0.02em;font-family:sans-serif">PRATO</span>
-                <span style="color:#22c55e;font-size:1.1rem;margin-left:3px">&#9679;</span>
+                <span style="color:#27AE60;font-size:1.1rem;margin-left:3px">&#9679;</span>
                 <div style="font-size:0.7rem;color:#475569;margin-top:4px;
                             font-weight:500;letter-spacing:0.05em;
                             text-transform:uppercase">

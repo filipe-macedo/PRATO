@@ -10,15 +10,15 @@ _CSS = """
 <style>
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SIDEBAR — fundo escuro
+   SIDEBAR — fundo escuro (slate #2C3E50)
 ═══════════════════════════════════════════════════════════════════════════ */
 [data-testid="stSidebar"] {
-    background-color: #0f172a !important;
-    border-right: 1px solid #1e293b !important;
+    background-color: #2C3E50 !important;
+    border-right: 1px solid #1a252f !important;
 }
 
 /* ── Esconde o nav automático do Streamlit multipage ────────────────────── *
-   Usamos st.page_link() para controlo total da posição e ordem dos links. */
+   Usamos st.page_link() para controle total da posição e ordem dos links. */
 [data-testid="stSidebarNav"] {
     display: none !important;
 }
@@ -35,7 +35,7 @@ _CSS = """
 [data-testid="stSidebar"] small,
 [data-testid="stSidebar"] .stMarkdown,
 [data-testid="stSidebar"] .stMarkdown p {
-    color: #94a3b8 !important;
+    color: #95a5a6 !important;
 }
 
 /* títulos */
@@ -48,63 +48,42 @@ _CSS = """
 
 /* separadores */
 [data-testid="stSidebar"] hr {
-    border-color: #1e293b !important;
+    border-color: #1a252f !important;
     margin: 0.75rem 0 !important;
 }
 
 /* radio labels */
 [data-testid="stSidebar"] label,
 [data-testid="stSidebar"] .stRadio > label {
-    color: #94a3b8 !important;
+    color: #95a5a6 !important;
 }
 
 /* file uploader */
 [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
-    background-color: #1e293b !important;
-    border-color: #334155 !important;
+    background-color: #1a252f !important;
+    border-color: #2c3e50 !important;
 }
 
 /* botões dentro da sidebar */
 [data-testid="stSidebar"] .stButton > button {
-    background-color: #1e293b !important;
-    color: #e2e8f0 !important;
-    border: 1px solid #334155 !important;
+    background-color: #1a252f !important;
+    color: #f1f5f9 !important;
+    border: 1px solid #34495e !important;
     border-radius: 8px !important;
 }
 [data-testid="stSidebar"] .stButton > button:hover {
-    background-color: #273548 !important;
-    border-color: #475569 !important;
-}
-
-/* nav links (multipage) */
-[data-testid="stSidebarNav"] a {
-    border-radius: 8px !important;
-    margin-bottom: 2px !important;
-}
-[data-testid="stSidebarNav"] a span {
-    color: #94a3b8 !important;
-    font-size: 0.875rem !important;
-    font-weight: 500 !important;
-}
-[data-testid="stSidebarNav"] a:hover span {
-    color: #e2e8f0 !important;
-}
-[data-testid="stSidebarNav"] [aria-selected="true"] span {
-    color: #22c55e !important;
-    font-weight: 600 !important;
-}
-[data-testid="stSidebarNav"] li[aria-selected="true"] {
-    background-color: rgba(34, 197, 94, 0.12) !important;
+    background-color: #243342 !important;
+    border-color: #4a6278 !important;
 }
 
 /* alertas na sidebar */
 [data-testid="stSidebar"] [data-testid="stAlert"] {
-    background-color: #1e293b !important;
-    border-color: #334155 !important;
-    color: #94a3b8 !important;
+    background-color: #1a252f !important;
+    border-color: #34495e !important;
+    color: #95a5a6 !important;
 }
 [data-testid="stSidebar"] [data-testid="stAlert"] p {
-    color: #94a3b8 !important;
+    color: #95a5a6 !important;
 }
 
 
@@ -123,19 +102,19 @@ _CSS = """
 h1 {
     font-size: 1.6rem !important;
     font-weight: 700 !important;
-    color: #0f172a !important;
+    color: #2C3E50 !important;
     letter-spacing: -0.02em !important;
     margin-bottom: 0.1rem !important;
 }
 h2 {
     font-size: 1.2rem !important;
     font-weight: 600 !important;
-    color: #1e293b !important;
+    color: #2C3E50 !important;
 }
 h3 {
     font-size: 0.8rem !important;
-    font-weight: 600 !important;
-    color: #64748b !important;
+    font-weight: 700 !important;
+    color: #7f8c8d !important;
     text-transform: uppercase !important;
     letter-spacing: 0.07em !important;
     margin-top: 1.5rem !important;
@@ -144,27 +123,27 @@ h3 {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   METRIC CARDS
+   METRIC CARDS (Streamlit native)
 ═══════════════════════════════════════════════════════════════════════════ */
 [data-testid="metric-container"] {
     background: #ffffff !important;
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #dde1e7 !important;
     border-radius: 14px !important;
     padding: 1.1rem 1.4rem !important;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08) !important;
 }
 [data-testid="stMetricLabel"] > div,
 [data-testid="stMetricLabel"] label {
     font-size: 0.72rem !important;
-    font-weight: 600 !important;
-    color: #64748b !important;
+    font-weight: 700 !important;
+    color: #7f8c8d !important;
     text-transform: uppercase !important;
     letter-spacing: 0.07em !important;
 }
 [data-testid="stMetricValue"] > div {
     font-size: 1.9rem !important;
     font-weight: 700 !important;
-    color: #0f172a !important;
+    color: #2C3E50 !important;
     line-height: 1.2 !important;
 }
 [data-testid="stMetricDelta"] svg { display: none !important; }
@@ -184,15 +163,15 @@ h3 {
     transition: all 0.15s ease !important;
 }
 .stButton > button[kind="primary"] {
-    background-color: #22c55e !important;
-    border-color: #22c55e !important;
+    background-color: #27AE60 !important;
+    border-color: #27AE60 !important;
     color: #ffffff !important;
     font-weight: 600 !important;
 }
 .stButton > button[kind="primary"]:hover {
-    background-color: #16a34a !important;
-    border-color: #16a34a !important;
-    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.35) !important;
+    background-color: #219a52 !important;
+    border-color: #219a52 !important;
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.35) !important;
 }
 
 
@@ -201,7 +180,7 @@ h3 {
 ═══════════════════════════════════════════════════════════════════════════ */
 .stTabs [data-baseweb="tab-list"] {
     gap: 0 !important;
-    border-bottom: 2px solid #e2e8f0 !important;
+    border-bottom: 2px solid #dde1e7 !important;
     background: transparent !important;
 }
 .stTabs [data-baseweb="tab"] {
@@ -212,17 +191,17 @@ h3 {
     padding: 0.6rem 1.1rem !important;
     font-size: 0.875rem !important;
     font-weight: 500 !important;
-    color: #64748b !important;
+    color: #7f8c8d !important;
     border-radius: 0 !important;
 }
 .stTabs [data-baseweb="tab"]:hover {
-    color: #334155 !important;
+    color: #2C3E50 !important;
     background: transparent !important;
 }
 .stTabs [aria-selected="true"] {
-    color: #22c55e !important;
-    border-bottom: 2px solid #22c55e !important;
-    font-weight: 600 !important;
+    color: #27AE60 !important;
+    border-bottom: 2px solid #27AE60 !important;
+    font-weight: 700 !important;
 }
 
 
@@ -230,21 +209,21 @@ h3 {
    EXPANDERS
 ═══════════════════════════════════════════════════════════════════════════ */
 [data-testid="stExpander"] {
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #dde1e7 !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     background: #ffffff !important;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    box-shadow: 0 1px 4px rgba(44, 62, 80, 0.06) !important;
 }
 [data-testid="stExpander"] summary {
-    background-color: #f8fafc !important;
+    background-color: #f8f9fa !important;
     font-weight: 600 !important;
     font-size: 0.875rem !important;
-    color: #1e293b !important;
+    color: #2C3E50 !important;
     padding: 0.75rem 1rem !important;
 }
 [data-testid="stExpander"] summary:hover {
-    background-color: #f1f5f9 !important;
+    background-color: #ECF0F1 !important;
 }
 [data-testid="stExpander"] > details > div {
     background: #ffffff !important;
@@ -256,7 +235,7 @@ h3 {
    DATAFRAME / TABELAS
 ═══════════════════════════════════════════════════════════════════════════ */
 [data-testid="stDataFrame"] {
-    border: 1px solid #e2e8f0 !important;
+    border: 1px solid #dde1e7 !important;
     border-radius: 12px !important;
     overflow: hidden !important;
     background: #ffffff !important;
@@ -279,12 +258,21 @@ h3 {
 [data-testid="stNumberInput"] input,
 [data-baseweb="select"] {
     border-radius: 8px !important;
-    border-color: #e2e8f0 !important;
+    border-color: #dde1e7 !important;
     font-size: 0.875rem !important;
 }
 [data-baseweb="select"]:hover,
 [data-testid="stDateInput"] input:hover {
-    border-color: #22c55e !important;
+    border-color: #27AE60 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RADIO — filter bar
+═══════════════════════════════════════════════════════════════════════════ */
+[data-testid="stRadio"] label {
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
 }
 
 
@@ -292,31 +280,23 @@ h3 {
    MISC
 ═══════════════════════════════════════════════════════════════════════════ */
 hr {
-    border-color: #e2e8f0 !important;
+    border-color: #dde1e7 !important;
     margin: 1.25rem 0 !important;
 }
 
-/* esconde rodapé e menu hambúrguer — NÃO esconde o header inteiro
-   para preservar o botão de reabrir a sidebar                          */
+/* esconde rodapé e menu hambúrguer */
 footer    { visibility: hidden !important; }
 #MainMenu { visibility: hidden !important; }
 
-/* esconde apenas a barra de ferramentas interna (deploy, running…)
-   mas mantém o botão de toggle da sidebar visível                      */
-[data-testid="stToolbar"]            { visibility: hidden !important; }
-[data-testid="stStatusWidget"]       { visibility: hidden !important; }
-[data-testid="stDecoration"]         { display: none !important; }
+/* esconde barra de ferramentas interna (deploy, running…) */
+[data-testid="stToolbar"]      { visibility: hidden !important; }
+[data-testid="stStatusWidget"] { visibility: hidden !important; }
+[data-testid="stDecoration"]   { display: none !important; }
 
 /* header transparente e sem altura extra */
 header {
     background: transparent !important;
     height: auto !important;
-}
-
-/* botão de reabrir sidebar (ícone >) — garante visibilidade */
-[data-testid="stSidebarCollapsedControl"] {
-    visibility: visible !important;
-    opacity: 1 !important;
 }
 
 </style>
