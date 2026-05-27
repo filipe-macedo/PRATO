@@ -30,7 +30,6 @@ def _features_temporais(data: date) -> dict:
 
 
 def _buscar_lags(db: Session, produto_id: int, turno_id: int, data_alvo: date) -> dict:
-    from datetime import timedelta
     resultado = {}
     for lag, chave in [(1, "lag_1d"), (7, "lag_7d")]:
         data_lag = date.fromordinal(data_alvo.toordinal() - lag)
@@ -42,7 +41,6 @@ def _buscar_lags(db: Session, produto_id: int, turno_id: int, data_alvo: date) -
         resultado[chave] = float(venda.quantidade_vendida) if venda else np.nan
 
     for janela, chave in [(7, "media_movel_7d"), (14, "media_movel_14d")]:
-        from datetime import timedelta
         inicio = date.fromordinal(data_alvo.toordinal() - janela)
         vendas = db.query(Venda).filter(
             Venda.produto_id == produto_id,

@@ -1,7 +1,6 @@
 """Módulo M2 — Limpeza, padronização e engenharia de atributos."""
 
 import unicodedata
-import numpy as np
 import pandas as pd
 from pathlib import Path
 from scipy import stats

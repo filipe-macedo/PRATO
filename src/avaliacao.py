@@ -141,7 +141,8 @@ def plotar_analise_residuos(df: pd.DataFrame, caminho_saida: str) -> None:
 
     axes[0, 0].scatter(df["quantidade_prevista"], residuos, alpha=0.4, s=15, color="#E8521A")
     axes[0, 0].axhline(0, color="gray", linestyle="--")
-    axes[0, 0].set_xlabel("Previsto"); axes[0, 0].set_ylabel("Resíduo")
+    axes[0, 0].set_xlabel("Previsto")
+    axes[0, 0].set_ylabel("Resíduo")
     axes[0, 0].set_title("Resíduos × Previsto")
 
     stats.probplot(residuos, dist="norm", plot=axes[0, 1])

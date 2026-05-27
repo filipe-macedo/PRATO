@@ -1,6 +1,4 @@
 import pytest
-import pandas as pd
-from pathlib import Path
 from src.ingestao import carregar_dados, validar_colunas, inspecionar_dados
 
 

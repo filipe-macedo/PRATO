@@ -8,7 +8,6 @@ for _p in [str(_ROOT), str(_DASH)]:
         sys.path.insert(0, _p)
 
 import streamlit as st
-import pandas as pd
 from componentes.carregador import carregar_historico_vendas
 from componentes.graficos import serie_temporal_vendas, barras_por_produto, heatmap_dia_turno
 from componentes.tabelas import tabela_vendas_resumo

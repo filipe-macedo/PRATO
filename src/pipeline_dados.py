@@ -14,7 +14,7 @@ from src.preprocessamento import (
     separar_treino_teste, exportar_dados,
 )
 from src.config import (
-    COLUNAS_OBRIGATORIAS, CAMINHO_DADOS_TRATADOS, PROPORCAO_TREINO
+    CAMINHO_DADOS_TRATADOS, PROPORCAO_TREINO,
 )
 
 

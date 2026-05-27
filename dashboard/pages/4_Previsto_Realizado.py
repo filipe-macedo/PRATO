@@ -9,7 +9,6 @@ for _p in [str(_ROOT), str(_DASH)]:
 
 import numpy as np
 import streamlit as st
-import pandas as pd
 from componentes.carregador import carregar_historico_vendas, carregar_previsoes_arquivo
 from componentes.graficos import previsto_vs_realizado, dispersao_previsto_realizado, distribuicao_erros
 from componentes.estilos import aplicar_estilos

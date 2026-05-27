@@ -8,7 +8,6 @@ for _p in [str(_ROOT), str(_DASH)]:
         sys.path.insert(0, _p)
 
 import streamlit as st
-import plotly.graph_objects as go
 from componentes.carregador import carregar_metricas
 from componentes.tabelas import tabela_metricas_modelos
 from componentes.estilos import aplicar_estilos

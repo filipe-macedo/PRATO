@@ -1,4 +1,3 @@
-import pytest
 import pandas as pd
 from src.preprocessamento import (
     padronizar_datas, padronizar_turnos, sinalizar_inconsistencias,

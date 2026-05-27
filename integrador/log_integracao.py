@@ -10,7 +10,6 @@ import json
 import logging
 import logging.handlers
 from datetime import datetime
-from pathlib import Path
 from typing import List, Optional
 
 from integrador.config_integracao import DIR_LOGS

@@ -12,7 +12,7 @@ from typing import Optional, Tuple
 
 import pandas as pd
 
-from integrador.config_integracao import DIR_PROCESSED, DIR_QUARANTINE_PDV, DIR_QUARANTINE_ESTOQUE
+from integrador.config_integracao import DIR_QUARANTINE_PDV, DIR_QUARANTINE_ESTOQUE
 from integrador.connectors.base_connector import BaseConnector
 from integrador.log_integracao import registrar_execucao
 from integrador.transformador import transformar_vendas, transformar_estoque
