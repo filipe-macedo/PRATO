@@ -38,11 +38,9 @@ def renderizar_sidebar(mostrar_upload: bool = False) -> None:
             </div>
         """, unsafe_allow_html=True)
 
-        # ── 2. Status da fonte ────────────────────────────────────────────
+        # ── 2. Status — só mostra quando API está conectada ──────────────
         if api_disponivel():
             st.success("API Backend online")
-        else:
-            st.info("Modo demo — dados sintéticos.")
 
         st.markdown("---")
 

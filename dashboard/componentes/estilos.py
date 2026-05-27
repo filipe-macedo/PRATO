@@ -253,35 +253,64 @@ h3 {
 
 /* ═══════════════════════════════════════════════════════════════════════════
    INPUTS / SELECTS — fundo branco e texto legível na área principal
+   Cobre: selectbox, multiselect, date input, number input
 ═══════════════════════════════════════════════════════════════════════════ */
-[data-testid="stDateInput"] input,
-[data-testid="stNumberInput"] input {
-    border-radius: 8px !important;
-    border-color: #dde1e7 !important;
-    font-size: 0.875rem !important;
-    background-color: #ffffff !important;
-    color: #2C3E50 !important;
-}
 
-/* Selectbox — container interno */
-[data-testid="stSelectbox"] [data-baseweb="select"] > div {
+/* Todos os selects (select + multiselect) na área principal */
+.main [data-baseweb="select"] > div {
     background-color: #ffffff !important;
     border-color: #dde1e7 !important;
     border-radius: 8px !important;
 }
-/* Texto do item selecionado */
-[data-testid="stSelectbox"] [data-baseweb="select"] span,
-[data-testid="stSelectbox"] [data-baseweb="select"] div {
+.main [data-baseweb="select"] span {
     color: #2C3E50 !important;
 }
-/* Ícone chevron */
-[data-testid="stSelectbox"] [data-baseweb="select"] svg {
+.main [data-baseweb="select"] svg {
     fill: #7f8c8d !important;
 }
-/* Hover na borda */
-[data-testid="stSelectbox"]:hover [data-baseweb="select"] > div,
+.main [data-baseweb="select"] > div:hover {
+    border-color: #27AE60 !important;
+}
+
+/* Tags do multiselect (itens selecionados) */
+.main [data-baseweb="tag"] {
+    background-color: rgba(39,174,96,0.12) !important;
+}
+.main [data-baseweb="tag"] span {
+    color: #27AE60 !important;
+}
+
+/* Date input */
+[data-testid="stDateInput"] input {
+    background-color: #ffffff !important;
+    color: #2C3E50 !important;
+    border-color: #dde1e7 !important;
+    border-radius: 8px !important;
+}
 [data-testid="stDateInput"] input:hover {
     border-color: #27AE60 !important;
+}
+
+/* Number input — campo de texto */
+[data-testid="stNumberInput"] input {
+    background-color: #ffffff !important;
+    color: #2C3E50 !important;
+    border-color: #dde1e7 !important;
+}
+/* Number input — botões +/− */
+[data-testid="stNumberInput"] button {
+    background-color: #ffffff !important;
+    color: #2C3E50 !important;
+    border-color: #dde1e7 !important;
+}
+[data-testid="stNumberInput"] button:hover {
+    background-color: #ECF0F1 !important;
+    border-color: #27AE60 !important;
+}
+[data-testid="stNumberInput"] button svg,
+[data-testid="stNumberInput"] button p {
+    fill: #2C3E50 !important;
+    color: #2C3E50 !important;
 }
 
 
