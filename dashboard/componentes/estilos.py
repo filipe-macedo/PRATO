@@ -252,35 +252,50 @@ h3 {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INPUTS / SELECTS — fundo branco e texto legível na área principal
-   Cobre: selectbox, multiselect, date input, number input
+   INPUTS / SELECTS — fundo branco e texto legível
+   Usa data-testid explícitos (mais confiável que .main no Streamlit)
 ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Todos os selects (select + multiselect) na área principal */
-.main [data-baseweb="select"] > div {
+/* ── Selectbox ──────────────────────────────────────────────────────────── */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div {
     background-color: #ffffff !important;
     border-color: #dde1e7 !important;
     border-radius: 8px !important;
 }
-.main [data-baseweb="select"] span {
+[data-testid="stSelectbox"] [data-baseweb="select"] span {
     color: #2C3E50 !important;
 }
-.main [data-baseweb="select"] svg {
+[data-testid="stSelectbox"] [data-baseweb="select"] svg {
     fill: #7f8c8d !important;
 }
-.main [data-baseweb="select"] > div:hover {
+[data-testid="stSelectbox"] [data-baseweb="select"] > div:hover {
     border-color: #27AE60 !important;
 }
 
-/* Tags do multiselect (itens selecionados) */
-.main [data-baseweb="tag"] {
+/* ── MultiSelect ────────────────────────────────────────────────────────── */
+[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    border-color: #dde1e7 !important;
+    border-radius: 8px !important;
+}
+[data-testid="stMultiSelect"] [data-baseweb="select"] span {
+    color: #2C3E50 !important;
+}
+[data-testid="stMultiSelect"] [data-baseweb="select"] svg {
+    fill: #7f8c8d !important;
+}
+[data-testid="stMultiSelect"] [data-baseweb="select"] > div:hover {
+    border-color: #27AE60 !important;
+}
+/* Tags dos itens selecionados no multiselect */
+[data-testid="stMultiSelect"] [data-baseweb="tag"] {
     background-color: rgba(39,174,96,0.12) !important;
 }
-.main [data-baseweb="tag"] span {
+[data-testid="stMultiSelect"] [data-baseweb="tag"] span {
     color: #27AE60 !important;
 }
 
-/* Date input */
+/* ── Date input ─────────────────────────────────────────────────────────── */
 [data-testid="stDateInput"] input {
     background-color: #ffffff !important;
     color: #2C3E50 !important;
@@ -291,13 +306,12 @@ h3 {
     border-color: #27AE60 !important;
 }
 
-/* Number input — campo de texto */
+/* ── Number input — campo e botões +/− ──────────────────────────────────── */
 [data-testid="stNumberInput"] input {
     background-color: #ffffff !important;
     color: #2C3E50 !important;
     border-color: #dde1e7 !important;
 }
-/* Number input — botões +/− */
 [data-testid="stNumberInput"] button {
     background-color: #ffffff !important;
     color: #2C3E50 !important;
