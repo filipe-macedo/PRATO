@@ -252,16 +252,34 @@ h3 {
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INPUTS / SELECTS
+   INPUTS / SELECTS — fundo branco e texto legível na área principal
 ═══════════════════════════════════════════════════════════════════════════ */
 [data-testid="stDateInput"] input,
-[data-testid="stNumberInput"] input,
-[data-baseweb="select"] {
+[data-testid="stNumberInput"] input {
     border-radius: 8px !important;
     border-color: #dde1e7 !important;
     font-size: 0.875rem !important;
+    background-color: #ffffff !important;
+    color: #2C3E50 !important;
 }
-[data-baseweb="select"]:hover,
+
+/* Selectbox — container interno */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    border-color: #dde1e7 !important;
+    border-radius: 8px !important;
+}
+/* Texto do item selecionado */
+[data-testid="stSelectbox"] [data-baseweb="select"] span,
+[data-testid="stSelectbox"] [data-baseweb="select"] div {
+    color: #2C3E50 !important;
+}
+/* Ícone chevron */
+[data-testid="stSelectbox"] [data-baseweb="select"] svg {
+    fill: #7f8c8d !important;
+}
+/* Hover na borda */
+[data-testid="stSelectbox"]:hover [data-baseweb="select"] > div,
 [data-testid="stDateInput"] input:hover {
     border-color: #27AE60 !important;
 }

@@ -409,7 +409,7 @@ fc1, fc2, fc3, fc4 = st.columns([3, 2, 3, 1])
 with fc1:
     turno = st.radio("Turno", ["Almoço", "Café", "Jantar", "24h"], horizontal=True)
 with fc2:
-    _periodo = st.selectbox("Período", ["Hoje", "Esta Semana", "Último Mês"])
+    _periodo = st.selectbox("Período", ["Hoje", "Amanhã", "Semana que vem"])
 with fc3:
     _categoria = st.selectbox(
         "Categoria",

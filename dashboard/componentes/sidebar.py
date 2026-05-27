@@ -12,7 +12,6 @@ _PAGINAS = [
     ("Inicio.py",                     "Início"),
     ("pages/1_Historico_Vendas.py",   "Histórico de Vendas"),
     ("pages/2_Previsao_Demanda.py",   "Previsão de Demanda"),
-    ("pages/3_Metricas_Modelo.py",    "Métricas do Modelo"),
     ("pages/4_Previsto_Realizado.py", "Previsto × Realizado"),
     ("pages/5_Apoio_Decisao.py",      "Apoio à Decisão"),
 ]
