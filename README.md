@@ -1,192 +1,299 @@
-# PRATO — Sistema de Previsão de Demanda em Restaurantes
+# PRATO — Restaurant Demand Forecasting System
+
+> An artificial intelligence system for forecasting restaurant product demand by date and shift. Developed as a Capstone Project (*Projeto Integrador*) for the **Systems Analysis and Development Program** at **Senac College -  Pernambuco**.
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111%2B-009688)](https://fastapi.tiangolo.com)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-FF4B4B)](https://streamlit.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-Sistema de inteligência artificial para **previsão de demanda por produto, data e turno**
-em restaurantes, com apoio à decisão operacional para gestão de estoque, compras e escala de cozinha.
+---
+
+## Project Overview
+
+**PRATO** is a machine learning-based system designed to help restaurants predict product demand more accurately.
+
+The system uses historical sales data to estimate how many units of each product are likely to be sold on specific dates and shifts, such as breakfast, lunch, snack time, and dinner.
+
+Its main goal is to support restaurant managers in making better operational decisions related to inventory, purchasing, food preparation, and kitchen staff planning.
+
+**System flow:**
+`Data → Data Processing Pipeline → Machine Learning Models → API + Dashboard`
 
 ---
 
-## Visão Geral
+## Key Features
 
-```
-Dados → [Pipeline de tratamento] → [Modelos ML] → [API + Dashboard]
-```
+* **Demand Forecasting:** Predicts the expected quantity sold by product, date, and shift.
+* **Data Processing Pipeline:** Cleans, normalizes, and prepares restaurant sales data for analysis and training.
+* **Machine Learning Models:** Uses predictive models to identify sales patterns and improve forecasting accuracy.
+* **Interactive Dashboard:** Displays forecasts, metrics, and visual insights through a user-friendly interface.
+* **REST API:** Provides endpoints for integration with other systems, such as POS and inventory tools.
+* **POS and Inventory Integration Layer:** Uses the Adapter design pattern to support future integrations with different restaurant systems.
 
-| Camada | Módulo | Tecnologia |
+---
+
+## Problem and Solution
+
+Many restaurants still make purchasing and production decisions based only on experience or manual estimates. This can lead to product shortages, food waste, unnecessary costs, and inefficient kitchen planning.
+
+**PRATO** proposes a data-driven solution by using historical sales information to generate demand forecasts. With these predictions, restaurants can prepare the right amount of food, reduce waste, improve stock control, and organize kitchen operations more efficiently.
+
+---
+
+## Tech Stack
+
+| Layer | Module | Technology |
 |---|---|---|
-| Ingestão e tratamento | `src/` | Pandas, NumPy |
-| Modelagem preditiva | `src/modelos.py` | Scikit-learn, XGBoost |
-| API REST | `app/` | FastAPI, SQLAlchemy |
-| Interface interativa | `dashboard/` | Streamlit, Plotly |
-| Integração PDV/Estoque | `integrador/` | Padrão Adapter |
+| Data Ingestion and Processing | `src/` | Pandas, NumPy |
+| Predictive Modeling | `src/modelos.py` | Scikit-learn, XGBoost |
+| REST API | `app/` | FastAPI, SQLAlchemy |
+| Interactive Interface | `dashboard/` | Streamlit, Plotly |
+| POS and Inventory Integration | `integrador/` | Adapter Pattern |
 
 ---
 
-## Requisitos
+## Requirements
 
-- Python **3.11** ou superior
-- Git
+Before running the project, make sure you have installed:
 
----
-
-## Instalação
-
-```bash
-# 1. Clonar o repositório
-git clone https://github.com/filipe-macedo/prato.git
-cd prato
-
-# 2. Criar e ativar ambiente virtual
-python -m venv .venv
-
-# Linux/macOS
-source .venv/bin/activate
-
-# Windows (PowerShell)
-.venv\Scripts\Activate.ps1
-
-# 3. Instalar dependências
-pip install -r requirements.txt
-
-# 4. Configurar variáveis de ambiente
-cp .env.example .env
-
-# 5. Inicializar banco de dados
-python -c "from app.database import engine, Base; Base.metadata.create_all(engine)"
-```
+* Python **3.11** or higher
+* Git
+* Pip
+* Virtual environment support for Python
 
 ---
 
-## Execução Rápida (dados de exemplo)
+## Getting Started
 
-```bash
-# Gerar dados sintéticos de demonstração
-python data/samples/gerar_dados_exemplo.py
+Follow these steps to run the project locally.
 
-# Executar pipeline completo: dados → treino → avaliação
-make pipeline
+### 1. Clone the Repository
 
-# Iniciar API (Terminal 1)
-make run-api
-# Acesse: http://localhost:8000/docs
+    git clone https://github.com/filipe-macedo/prato.git
+    cd prato
 
-# Iniciar dashboard (Terminal 2)
-make run-dashboard
-# Acesse: http://localhost:8501
-```
+### 2. Create a Virtual Environment
+
+    python -m venv .venv
+
+### 3. Activate the Virtual Environment
+
+Linux/macOS:
+
+    source .venv/bin/activate
+
+Windows PowerShell:
+
+    .venv\Scripts\Activate.ps1
+
+### 4. Install Dependencies
+
+    pip install -r requirements.txt
+
+### 5. Configure Environment Variables
+
+    cp .env.example .env
+
+### 6. Initialize the Database
+
+    python -c "from app.database import engine, Base; Base.metadata.create_all(engine)"
 
 ---
 
-## Execução com Dados Reais
+## Quick Start With Sample Data
 
-```bash
-# Coloque seu arquivo em data/raw/
-# Colunas obrigatórias: data, produto, turno, quantidade_vendida
+Use the commands below to run the system with demonstration data.
 
-python -m src.pipeline_dados --entrada data/raw/SEU_ARQUIVO.csv
-python -m src.modelos
-python -m src.avaliacao
-```
+### 1. Generate Sample Data
+
+    python data/samples/gerar_dados_exemplo.py
+
+### 2. Run the Full Pipeline
+
+    make pipeline
+
+This command executes the full process:
+
+Data processing → Model training → Model evaluation
+
+### 3. Start the API
+
+    make run-api
+
+After starting the API, access the interactive documentation at:
+
+`http://localhost:8000/docs`
+
+### 4. Start the Dashboard
+
+Open a second terminal and run:
+
+    make run-dashboard
+
+Then access:
+
+`http://localhost:8501`
 
 ---
 
-## Formato dos Dados de Entrada
+## Running With Real Data
 
-| Campo | Tipo | Obrigatório | Exemplo |
+To use real restaurant data, place your file inside the `data/raw/` directory.
+
+The input file must contain the following required columns:
+
+`data`, `produto`, `turno`, `quantidade_vendida`
+
+Then run:
+
+    python -m src.pipeline_dados --entrada data/raw/YOUR_FILE.csv
+    python -m src.modelos
+    python -m src.avaliacao
+
+---
+
+## Input Data Format
+
+| Field | Type | Required | Example |
 |---|---|---|---|
-| `data` | DATE | Sim | `2024-07-15` ou `15/07/2024` |
-| `produto` | TEXT | Sim | `prato_executivo` |
-| `turno` | TEXT | Sim | `almoco`, `jantar`, `cafe_manha` |
-| `quantidade_vendida` | NUMERIC | Sim | `42` |
-| `categoria` | TEXT | Não | `prato_principal` |
-| `preco_unitario` | NUMERIC | Não | `35.90` |
+| `data` | DATE | Yes | `2024-07-15` or `15/07/2024` |
+| `produto` | TEXT | Yes | `prato_executivo` |
+| `turno` | TEXT | Yes | `almoco`, `jantar`, `cafe_manha` |
+| `quantidade_vendida` | NUMERIC | Yes | `42` |
+| `categoria` | TEXT | No | `prato_principal` |
+| `preco_unitario` | NUMERIC | No | `35.90` |
 
-> Turnos aceitos: `almoco`, `jantar`, `cafe_manha`, `lanche` e variações com acento
-> ou maiúsculas — o pipeline normaliza automaticamente.
+Accepted shifts include:
+
+`almoco`, `jantar`, `cafe_manha`, `lanche`
+
+The pipeline automatically normalizes accents, uppercase letters, and common variations.
 
 ---
 
-## Métricas de Aceitação do Modelo
+## Model Acceptance Metrics
 
-| Métrica | Aprovado | Atenção |
+The model is evaluated using the following acceptance criteria:
+
+| Metric | Approved | Warning |
 |---|---|---|
-| MAE relativo | ≤ 15% | ≤ 30% |
-| R² | ≥ 0.50 | ≥ 0.30 |
-| Ganho MAE sobre baseline | ≥ 15% | ≥ 5% |
+| Relative MAE | ≤ 15% | ≤ 30% |
+| R² Score | ≥ 0.50 | ≥ 0.30 |
+| MAE Improvement Over Baseline | ≥ 15% | ≥ 5% |
 | MAPE | ≤ 25% | ≤ 40% |
 
----
-
-## Estrutura do Projeto
-
-```
-prato/
-├── app/            # API REST (FastAPI)
-├── dashboard/      # Interface (Streamlit)
-├── data/           # Dados — brutos NÃO versionados
-│   ├── external/   # Feriados nacionais (dado público)
-│   └── samples/    # Dados fictícios para demonstração
-├── database/       # DDL e scripts SQL
-├── docs/           # Documentação técnica
-├── integrador/     # Conectores PDV e estoque
-├── models/         # Modelos treinados (NÃO versionados)
-├── notebooks/      # Análise exploratória
-├── outputs/        # Métricas e previsões geradas (NÃO versionados)
-├── src/            # Pipeline de Machine Learning
-└── tests/          # Testes automatizados
-```
+These metrics help determine whether the prediction model is accurate enough for operational use.
 
 ---
 
-## Comandos Disponíveis
+## Project Structure
 
-```bash
-make install        # Instala dependências
-make run-api        # Inicia API FastAPI (porta 8000)
-make run-dashboard  # Inicia dashboard Streamlit (porta 8501)
-make pipeline       # Executa pipeline completo
-make test           # Executa testes com cobertura
-make lint           # Verifica qualidade do código
-make setup-db       # Cria tabelas no banco de dados
-make help           # Lista todos os comandos
-```
-
----
-
-## Testes
-
-```bash
-pytest tests/ -v --cov=src --cov=app
-```
+    prato/
+    ├── app/            # REST API built with FastAPI
+    ├── dashboard/      # Interactive dashboard built with Streamlit
+    ├── data/           # Data files - raw data is not versioned
+    │   ├── external/   # Public external data, such as national holidays
+    │   └── samples/    # Fictional demonstration data
+    ├── database/       # SQL scripts and database structure
+    ├── docs/           # Technical documentation
+    ├── integrador/     # POS and inventory connectors
+    ├── models/         # Trained models - not versioned
+    ├── notebooks/      # Exploratory data analysis
+    ├── outputs/        # Generated metrics and predictions - not versioned
+    ├── src/            # Machine Learning pipeline
+    └── tests/          # Automated tests
 
 ---
 
-## Documentação
+## Available Commands
 
-| Documento | Localização |
+| Command | Description |
 |---|---|
-| Documentação técnica completa (ABNT) | `docs/documentacao_tecnica.md` |
-| Arquitetura da solução | `docs/arquitetura.md` |
-| Dicionário de dados | `docs/dicionario_dados.md` |
-| Guia de contribuição | `docs/guia_contribuicao.md` |
-| API interativa (Swagger) | `http://localhost:8000/docs` |
+| `make install` | Installs project dependencies |
+| `make run-api` | Starts the FastAPI API on port 8000 |
+| `make run-dashboard` | Starts the Streamlit dashboard on port 8501 |
+| `make pipeline` | Runs the full Machine Learning pipeline |
+| `make test` | Runs tests with coverage |
+| `make lint` | Checks code quality |
+| `make setup-db` | Creates database tables |
+| `make help` | Lists all available commands |
 
 ---
 
-## Limitações da Versão 1.0
+## Testing
 
-- Integração com PDV apenas via upload manual (CSV/Excel)
-- Sem autenticação de usuários na API
-- Previsões pontuais (sem intervalo de confiança)
-- Reatreino do modelo é manual
-- Volume mínimo recomendado: 90 dias de histórico
+To run the automated tests, use:
+
+    pytest tests/ -v --cov=src --cov=app
 
 ---
 
-## Licença
+## Documentation
 
-[MIT License](LICENSE) — Copyright (c) 2026 Filipe Macedo
+| Document | Location |
+|---|---|
+| Complete Technical Documentation | `docs/documentacao_tecnica.md` |
+| Solution Architecture | `docs/arquitetura.md` |
+| Data Dictionary | `docs/dicionario_dados.md` |
+| Contribution Guide | `docs/guia_contribuicao.md` |
+| Interactive API Documentation | `http://localhost:8000/docs` |
+
+---
+
+## API Documentation
+
+When the API is running locally, the Swagger documentation can be accessed at:
+
+`http://localhost:8000/docs`
+
+This page allows developers to test endpoints, inspect request formats, and understand the available API operations.
+
+---
+
+## Version 1.0 Limitations
+
+The current version has the following limitations:
+
+* POS integration is currently available only through manual CSV or Excel upload.
+* The API does not yet include user authentication.
+* Forecasts are point estimates and do not include confidence intervals.
+* Model retraining is currently manual.
+* The recommended minimum dataset size is 90 days of sales history.
+
+---
+
+## Future Improvements
+
+If we had another semester, we would improve the project by implementing:
+
+* Automatic integration with POS and inventory systems.
+* User authentication and permission control.
+* Forecast confidence intervals.
+* Automatic model retraining.
+* Advanced reports for restaurant managers.
+* Support for multiple restaurant branches.
+* Real-time sales monitoring.
+* Cloud deployment.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+See the `LICENSE` file for more information.
+
+---
+
+## Authors & Project Team
+
+* Filipe Macedo — Project Development
+* Gabriel Coelho — Project Documentation and Review
+* Caio Barros — Backend Developer
+* Lucas Paulo — Dashboard and Frontend Developer
+* Daniel Gois — Machine Learning Pipeline Developer
+
+Academic Advisor / Professor: Prof. Rodrigo Rios de Larrazábal
+
+Tech English Course Professor: Prof. Leonardo Trevas
